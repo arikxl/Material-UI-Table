@@ -27,8 +27,9 @@ const Home = () => {
                     exportFileName: 'Soaps',
                     addRowPosition: 'first',
                     actionsColumnIndex: -1,
-                    selection: true,
+                    // selection: true,
                     grouping: true,
+                    columnsButton: true,
 
                 }}
                 editable={{
