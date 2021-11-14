@@ -1,9 +1,5 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState } from 'react';
 import MaterialTable from 'material-table';
-
-
-
-
 
 import { students } from './data/students';
 import { columns } from './data/columns';
@@ -18,6 +14,7 @@ const Home = () => {
             <h1>TABLE</h1>
 
             <MaterialTable columns={columns}
+                icons={tableIcons}
                 data={tableData}
                 title="Students Info"
                 options={{
@@ -27,10 +24,31 @@ const Home = () => {
                     paginationPosition: 'both',
                     exportButton: true,
                     exportAllData: true,
-                    exportFileName:'Soaps',
-                    
+                    exportFileName: 'Soaps',
+                    addRowPosition: 'first',
+                    actionsColumnIndex: -1,
+                    selection: true,
+                    grouping: true,
+
                 }}
-                icons={tableIcons}
+                editable={{
+                    onRowAdd: (newRow) => new Promise((resolve, reject) => {
+                        setTableData([...tableData, newRow])
+                        setTimeout(() => resolve(), 500);
+                    }),
+                    onRowUpdate: (newRow, oldRow) => new Promise((resolve, reject) => {
+                        const updatedData = [...tableData]
+                        updatedData[oldRow.tableData.id] = newRow
+                        setTableData(updatedData)
+                        setTimeout(() => resolve(), 500)
+                    }),
+                    onRowDelete: (selectedRow) => new Promise((resolve, reject) => {
+                        const updatedData = [...tableData]
+                        updatedData.splice(selectedRow.tableData.id, 1)
+                        setTableData(updatedData)
+                        setTimeout(() => resolve(), 1000)
+                    })
+                }}
             />
         </div>
     )

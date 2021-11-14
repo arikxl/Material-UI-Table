@@ -6,5 +6,5 @@ export const columns = [
     { title: "Gender", field: "gender", lookup:{M:'Male',F:'Female'} },
     { title: "City", field: "city" },
     { title: "School Fee", field: "fee", type: 'currency',
-     currencySetting:{currencyCode:'NIS', minimumFractionDigits:0} },
+     currencySetting:{currencyCode:'nis', minimumFractionDigits:0} },
 ]
